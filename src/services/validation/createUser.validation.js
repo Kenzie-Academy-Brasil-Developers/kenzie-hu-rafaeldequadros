@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const schemaCreateUser = yup.object().shape({
+export const schemaCreateUser = yup.object().shape({
     name: yup
         .string()
         .required("Nome obrigatório")
@@ -25,5 +25,3 @@ export const schemaUserLogin = yup.object().shape({
     email: yup.string().email("E-mail inválido").required("E-mail obrigatório"),
     password: yup.string().required("Senha obrigatório"),
 });
-
-export default schemaCreateUser;

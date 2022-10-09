@@ -1,18 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Logo from "../../assets/Logo.png";
-import StyledForm from "../../style/Form";
-import Input from "../../components/input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaUserLogin } from "../../validation/createUser.validation";
-import StyledBoxLogin from "../../style/BoxLogin";
-import { StyledBtnGrey, StyledBtnsPink } from "../../style/Buttons";
-import instance from "../../components/Axios";
+import { schemaUserLogin } from "../../services/validation/createUser.validation";
+import instance from "../../services/axios";
+
+import StyledBoxLogin from "./boxLogin";
+import StyledForm from "../../components/form";
+import { StyledBtnGrey, StyledBtnsPink } from "../../components/buttons";
+import Input from "../../components/input";
+
+import Logo from "../../assets/Logo.png";
 import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
     const navigate = useNavigate();
-    const { id } = useParams();
+    // const { id } = useParams();
     const {
         handleSubmit,
         register,
@@ -65,7 +67,7 @@ const Login = () => {
                     />
                     <StyledBtnsPink type="submit">Login</StyledBtnsPink>
                     <p>Ainda não possui conta?</p>
-                    <StyledBtnGrey onClick={handleClick}>
+                    <StyledBtnGrey type="button" onClick={handleClick}>
                         Cadastrar-se
                     </StyledBtnGrey>
                 </StyledForm>

@@ -1,5 +1,5 @@
-import { StyledLabel } from "../../style/Label";
-import { StyledSelect } from "../../style/Select";
+import { StyledLabel } from "../label";
+import { StyledSelect } from "./select";
 
 const Select = ({ id, name, register, children }) => {
     return (

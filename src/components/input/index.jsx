@@ -1,5 +1,5 @@
-import { StyledInput } from "../../style/Input";
-import { StyledLabel } from "../../style/Label";
+import { StyledInput } from "./input";
+import { StyledLabel } from "../label/index";
 
 const Input = ({ id, type, name, textLabel, register, placeholder, error }) => {
     return (

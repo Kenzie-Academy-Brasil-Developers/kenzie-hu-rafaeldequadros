@@ -38,7 +38,7 @@ export const StyledBoxLogin = styled.section`
         color: var(--color-grey-1);
     }
     h2 {
-        font-size: var(--title-size-1);
+        font-size: 20px;
         font-weight: 700;
 
         color: var(--color-grey-0);

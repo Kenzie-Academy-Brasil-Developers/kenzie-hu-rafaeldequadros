@@ -1,15 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import Logo from "../../assets/Logo.png";
-import Input from "../../components/input";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import schemaCreateUser from "../../validation/createUser.validation";
+import { schemaCreateUser } from "../../services/validation/createUser.validation";
+import instance from "../../services/axios";
+
+import Logo from "../../assets/Logo.png";
+import Input from "../../components/input";
 import Select from "../../components/select";
-import StyledBox from "../../style/BoxCadastro";
-import StyledForm from "../../style/Form";
-import instance from "../../components/Axios";
+
+import { StyledBtnBlack, StyledBtnsPink } from "../../components/buttons";
+import StyledBox from "./boxCadastro";
+import StyledForm from "../../components/form";
 import "./style.css";
-import { StyledBtnBlack, StyledBtnsPink } from "../../style/Buttons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,7 +25,7 @@ const Cadastro = () => {
 
         instance
             .post("/users", data)
-            .then((res) => toast.success("Deu Certo"))
+            .then((res) => toast.success("Cadastro realizado com sucesso!"))
             .catch((res) => toast.error("Cadastro não realizado"));
     };
 
