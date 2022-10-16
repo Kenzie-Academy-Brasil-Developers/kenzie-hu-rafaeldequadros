@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaCreateUser } from "../../services/validation/createUser.validation";
-import instance from "../../services/axios";
+import api from "../../services/axios";
 
 import Logo from "../../assets/Logo.png";
 import Input from "../../components/input";
@@ -23,9 +23,11 @@ const Cadastro = () => {
     const onSubmit = (data) => {
         delete data.confirmPassword;
 
-        instance
-            .post("/users", data)
-            .then((res) => toast.success("Cadastro realizado com sucesso!"))
+        api.post("/users", data)
+            .then((res) => {
+                toast.success("Cadastro realizado com sucesso!");
+                navigate("/login");
+            })
             .catch((res) => toast.error("Cadastro não realizado"));
     };
 

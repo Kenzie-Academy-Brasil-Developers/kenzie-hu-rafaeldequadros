@@ -25,3 +25,6 @@ export const schemaUserLogin = yup.object().shape({
     email: yup.string().email("E-mail inválido").required("E-mail obrigatório"),
     password: yup.string().required("Senha obrigatório"),
 });
+export const schemaCreateTech = yup.object().shape({
+    title: yup.string().required("Nome obrigatório"),
+});

@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Cadastro from "../pages/cadastro";
+import Dashboard from "../pages/dashboard";
 import Login from "../pages/login";
 
 const Routers = () => {
@@ -7,7 +8,8 @@ const Routers = () => {
         <Routes>
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/login" element={<Login />} />
-            <Route path="*" element={<Navigate to="/cadastro" />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
     );
 };

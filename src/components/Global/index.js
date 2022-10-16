@@ -66,6 +66,7 @@ table {
     --color-negative: #E83F5B;
 
     --title-size-1: 16px;
+    --title-size-2: 18px
     --headline: 12px;
 }
 

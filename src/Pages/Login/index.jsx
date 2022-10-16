@@ -1,8 +1,7 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaUserLogin } from "../../services/validation/createUser.validation";
-import instance from "../../services/axios";
 
 import StyledBoxLogin from "./boxLogin";
 import StyledForm from "../../components/form";
@@ -12,9 +11,17 @@ import Input from "../../components/input";
 import Logo from "../../assets/Logo.png";
 import { ToastContainer, toast } from "react-toastify";
 
+import { AuthContext } from "../../contexts/AuthContext";
+import { useContext, useEffect } from "react";
+import api from "../../services/axios";
+
 const Login = () => {
     const navigate = useNavigate();
-    // const { id } = useParams();
+    const { setUser, verify, authLogin } = useContext(AuthContext);
+
+    useEffect(() => {
+        authLogin();
+    }, []);
     const {
         handleSubmit,
         register,
@@ -26,18 +33,19 @@ const Login = () => {
     });
 
     const onSubmit = (data) => {
-        instance
-            .post("/sessions", data)
+        api.post("/sessions", data)
             .then((res) => {
-                console.log(res);
                 localStorage.setItem("Kenzie-Token", res.data.token);
                 localStorage.setItem("Kenzie-User-id", res.data.user.id);
                 toast.success("Login realizado com sucesso");
+                setUser(res.data.user);
+                handleClick();
             })
             .catch((res) => toast.error("Email ou senha incorretos"));
     };
 
-    const handleClick = () => navigate("/cadastro");
+    const handleClick = (destination) =>
+        destination ? navigate("/cadastro") : navigate("/dashboard");
 
     return (
         <>
@@ -67,7 +75,10 @@ const Login = () => {
                     />
                     <StyledBtnsPink type="submit">Login</StyledBtnsPink>
                     <p>Ainda não possui conta?</p>
-                    <StyledBtnGrey type="button" onClick={handleClick}>
+                    <StyledBtnGrey
+                        type="button"
+                        onClick={() => handleClick(true)}
+                    >
                         Cadastrar-se
                     </StyledBtnGrey>
                 </StyledForm>
