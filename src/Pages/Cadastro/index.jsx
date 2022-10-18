@@ -14,22 +14,14 @@ import StyledForm from "../../components/form";
 import "./style.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 const Cadastro = () => {
     const navigate = useNavigate();
+    const { onSubmitCadaster } = useContext(UserContext);
 
     const handleClick = () => navigate("/login");
-
-    const onSubmit = (data) => {
-        delete data.confirmPassword;
-
-        api.post("/users", data)
-            .then((res) => {
-                toast.success("Cadastro realizado com sucesso!");
-                navigate("/login");
-            })
-            .catch((res) => toast.error("Cadastro não realizado"));
-    };
 
     const {
         handleSubmit,
@@ -52,7 +44,7 @@ const Cadastro = () => {
                     <h2>Criar sua conta</h2>
                     <p>Rapido e grátis, vamos nessa</p>
                 </div>
-                <StyledForm onSubmit={handleSubmit(onSubmit)}>
+                <StyledForm onSubmit={handleSubmit(onSubmitCadaster)}>
                     <Input
                         id={"name"}
                         name={"name"}

@@ -8,6 +8,7 @@ import { GlobalStyles } from "./components/global";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ModalProvider } from "./contexts/ModalContext";
 import { DashProvider } from "./contexts/DashContext";
+import { UserProvider } from "./contexts/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -16,9 +17,11 @@ root.render(
             <GlobalStyles />
             <AuthProvider>
                 <DashProvider>
-                    <ModalProvider>
-                        <App />
-                    </ModalProvider>
+                    <UserProvider>
+                        <ModalProvider>
+                            <App />
+                        </ModalProvider>
+                    </UserProvider>
                 </DashProvider>
             </AuthProvider>
         </React.StrictMode>

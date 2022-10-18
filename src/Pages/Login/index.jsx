@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaUserLogin } from "../../services/validation/createUser.validation";
@@ -13,11 +12,11 @@ import { ToastContainer, toast } from "react-toastify";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useEffect } from "react";
-import api from "../../services/axios";
+import { UserContext } from "../../contexts/UserContext";
 
 const Login = () => {
-    const navigate = useNavigate();
-    const { setUser, verify, authLogin } = useContext(AuthContext);
+    const { authLogin } = useContext(AuthContext);
+    const { onSubmitLogin, handleClick } = useContext(UserContext);
 
     useEffect(() => {
         authLogin();
@@ -32,21 +31,6 @@ const Login = () => {
         resolver: yupResolver(schemaUserLogin),
     });
 
-    const onSubmit = (data) => {
-        api.post("/sessions", data)
-            .then((res) => {
-                localStorage.setItem("Kenzie-Token", res.data.token);
-                localStorage.setItem("Kenzie-User-id", res.data.user.id);
-                toast.success("Login realizado com sucesso");
-                setUser(res.data.user);
-                handleClick();
-            })
-            .catch((res) => toast.error("Email ou senha incorretos"));
-    };
-
-    const handleClick = (destination) =>
-        destination ? navigate("/cadastro") : navigate("/dashboard");
-
     return (
         <>
             <section className="logo" style={{ justifyContent: "center" }}>
@@ -55,7 +39,7 @@ const Login = () => {
 
             <StyledBoxLogin>
                 <h2>Login</h2>
-                <StyledForm onSubmit={handleSubmit(onSubmit)}>
+                <StyledForm onSubmit={handleSubmit(onSubmitLogin)}>
                     <Input
                         id={"email"}
                         name={"email"}
