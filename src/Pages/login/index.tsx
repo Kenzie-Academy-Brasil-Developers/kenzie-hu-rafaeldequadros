@@ -8,11 +8,22 @@ import { StyledBtnGrey, StyledBtnsPink } from "../../components/buttons";
 import Input from "../../components/input";
 
 import Logo from "../../assets/Logo.png";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
+
+import { FieldError } from "react-hook-form";
+
+export interface IUserLogin {
+    email?: string;
+    password?: string | number;
+    error?: {
+        email?: FieldError;
+        password?: FieldError;
+    };
+}
 
 const Login = () => {
     const { authLogin } = useContext(AuthContext);
@@ -27,7 +38,7 @@ const Login = () => {
         formState: {
             errors: { email, password },
         },
-    } = useForm({
+    } = useForm<IUserLogin>({
         resolver: yupResolver(schemaUserLogin),
     });
 

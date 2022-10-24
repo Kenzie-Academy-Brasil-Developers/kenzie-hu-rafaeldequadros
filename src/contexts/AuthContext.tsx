@@ -2,12 +2,45 @@ import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/axios";
 
-import React from "react";
+import { ReactNode } from "react";
 
-export const AuthContext = createContext({});
+interface IAuthContext {
+    user: IUser;
+    setUser: React.Dispatch<React.SetStateAction<IUser>>;
+    verify: () => void;
+    auth: boolean;
+    authLogin: () => void;
+}
 
-export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState([]);
+interface IUser {
+    id: string;
+    name: string;
+    email: string;
+    course_module: string;
+    bio: string;
+    contact: string;
+    techs: ITech[];
+    works: Array<[]>;
+    created_at: Date;
+    updated_at: Date;
+    avatar_url: string | null;
+}
+interface ITech {
+    id: string;
+    title: string;
+    status: string;
+    created_at: Date;
+    updated_at: Date;
+}
+
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
+
+interface IAuthChildren {
+    children: ReactNode;
+}
+
+export const AuthProvider = ({ children }: IAuthChildren) => {
+    const [user, setUser] = useState<IUser>({} as IUser);
     const [auth, setAuth] = useState(false);
     const navigate = useNavigate();
 

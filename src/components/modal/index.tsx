@@ -15,6 +15,11 @@ import { schemaCreateTech } from "../../services/validation/createUser.validatio
 import api from "../../services/axios";
 import { DashContext } from "../../contexts/DashContext";
 
+interface IData {
+    title: string;
+    status: string;
+}
+
 const Modal = () => {
     const { handleModal, setOpenModal } = useContext(ModalContext);
     const { requestTechs } = useContext(DashContext);
@@ -24,11 +29,11 @@ const Modal = () => {
         formState: {
             errors: { title },
         },
-    } = useForm({
+    } = useForm<IData>({
         resolver: yupResolver(schemaCreateTech),
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: IData) => {
         api.post("/users/techs", data, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("Kenzie-Token")}`,
@@ -56,7 +61,6 @@ const Modal = () => {
                         <StyledInput
                             {...register("title")}
                             id="title"
-                            error={title?.message}
                             placeholder="Material UI"
                         />
                         <StyledLabel htmlFor={"status"}>

@@ -2,9 +2,19 @@ import { createContext, useContext } from "react";
 import api from "../services/axios";
 import { AuthContext } from "./AuthContext";
 
-export const DashContext = createContext({});
+import { ReactNode } from "react";
 
-export const DashProvider = ({ children }) => {
+export const DashContext = createContext<IDashFunctions>({} as IDashFunctions);
+
+interface IDashProvider {
+    children: ReactNode;
+}
+interface IDashFunctions {
+    requestTechs: () => void;
+    deleteTech: (id: string) => void;
+}
+
+export const DashProvider = ({ children }: IDashProvider) => {
     const { setUser, verify } = useContext(AuthContext);
 
     async function requestTechs() {
@@ -18,7 +28,7 @@ export const DashProvider = ({ children }) => {
         }
     }
 
-    function deleteTech(id) {
+    function deleteTech(id: string) {
         api.delete(`/users/techs/${id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("Kenzie-Token")}`,

@@ -2,16 +2,15 @@ import { StyledInput } from "./input";
 import { StyledLabel } from "../label/index";
 
 import React, { InputHTMLAttributes } from "react";
-import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
     id: string;
-    type: string;
+    type?: string;
     name: string;
     textLabel: string;
-    register: UseFormRegister<FieldValues>;
+    register: any;
     placeholder: string;
-    error: string;
+    error: any;
 }
 
 const Input = ({

@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, FieldError } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaCreateUser } from "../../services/validation/createUser.validation";
-import api from "../../services/axios";
 
 import Logo from "../../assets/Logo.png";
 import Input from "../../components/input";
@@ -12,10 +11,24 @@ import { StyledBtnBlack, StyledBtnsPink } from "../../components/buttons";
 import StyledBox from "./boxCadastro";
 import StyledForm from "../../components/form";
 import "./style.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+
+export interface IUserCadaster {
+    email: string;
+    password: string | number;
+    confirmPassword?: string;
+    name: string;
+    bio: string;
+    contact: string;
+    course_module: string;
+    error?: {
+        email?: FieldError;
+        password?: FieldError;
+    };
+}
 
 const Cadastro = () => {
     const navigate = useNavigate();
@@ -29,7 +42,7 @@ const Cadastro = () => {
         formState: {
             errors: { name, email, password, confirmPassword, bio, contact },
         },
-    } = useForm({
+    } = useForm<IUserCadaster>({
         resolver: yupResolver(schemaCreateUser),
     });
 
