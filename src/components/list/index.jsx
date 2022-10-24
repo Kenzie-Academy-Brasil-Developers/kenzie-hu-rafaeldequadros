@@ -5,6 +5,8 @@ import Delete from "../../assets/Vector (4).png";
 import { StyledList } from "./style";
 import { DashContext } from "../../contexts/DashContext";
 
+import React from "react";
+
 const ListTech = () => {
     const { user, verify } = useContext(AuthContext);
     const { deleteTech, requestTechs } = useContext(DashContext);

@@ -8,11 +8,10 @@ import { useContext, useEffect } from "react";
 
 import ListTech from "../../components/list";
 import Modal from "../../components/modal";
-import api from "../../services/axios";
 import { DashContext } from "../../contexts/DashContext";
 
 const Dashboard = () => {
-    const { user, verify, auth } = useContext(AuthContext);
+    const { user, verify } = useContext(AuthContext);
     const { openModal, handleModal } = useContext(ModalContext);
     const { requestTechs } = useContext(DashContext);
 
@@ -24,8 +23,6 @@ const Dashboard = () => {
 
     useEffect(() => {
         verify();
-    }, []);
-    useEffect(() => {
         requestTechs();
     }, []);
 
