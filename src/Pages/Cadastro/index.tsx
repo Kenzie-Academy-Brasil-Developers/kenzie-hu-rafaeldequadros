@@ -9,8 +9,8 @@ import Select from "../../components/select";
 
 import { StyledBtnBlack, StyledBtnsPink } from "../../components/buttons";
 import StyledBox from "./boxCadastro";
+import { StyledLogo } from "./boxCadastro";
 import StyledForm from "../../components/form";
-import "./style.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useContext } from "react";
@@ -48,10 +48,10 @@ const Cadastro = () => {
 
     return (
         <>
-            <section className="logo">
+            <StyledLogo>
                 <img src={Logo} alt="" />
                 <StyledBtnBlack onClick={handleClick}>Voltar</StyledBtnBlack>
-            </section>
+            </StyledLogo>
             <StyledBox>
                 <div className="create">
                     <h2>Criar sua conta</h2>

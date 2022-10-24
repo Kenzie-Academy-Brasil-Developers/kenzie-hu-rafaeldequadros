@@ -44,4 +44,15 @@ export const StyledBox = styled.section`
         color: var(--color-grey-0);
     }
 `;
+
+export const StyledLogo = styled.section`
+    width: 90%;
+    max-width: 350px;
+    height: 80px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
 export default StyledBox;
