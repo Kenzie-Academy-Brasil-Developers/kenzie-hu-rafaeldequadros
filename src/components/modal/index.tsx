@@ -2,7 +2,6 @@ import { StyledBtnsPink, StyledBtnBlack } from "../buttons";
 import StyledInput from "../input/input";
 import { StyledSelect } from "../select/select/index";
 
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -38,7 +37,7 @@ const Modal = () => {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("Kenzie-Token")}`,
             },
-        }).then((res) => {
+        }).then(() => {
             setOpenModal(false);
             requestTechs();
         });

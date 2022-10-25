@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import api from "../services/axios";
-import { AuthContext } from "./AuthContext";
+import { AuthContext, IUser } from "./AuthContext";
 
 import { ReactNode } from "react";
 
@@ -14,12 +14,15 @@ interface IDashFunctions {
     deleteTech: (id: string) => void;
 }
 
+interface IRes {
+    data: IUser;
+}
 export const DashProvider = ({ children }: IDashProvider) => {
     const { setUser, verify } = useContext(AuthContext);
 
     async function requestTechs() {
         if (localStorage.getItem("Kenzie-User-id")) {
-            const res = await api.get(
+            const res: IRes = await api.get(
                 `/users/${localStorage.getItem("Kenzie-User-id")}`
             );
             return setUser(res.data);
@@ -34,7 +37,7 @@ export const DashProvider = ({ children }: IDashProvider) => {
                 Authorization: `Bearer ${localStorage.getItem("Kenzie-Token")}`,
             },
         })
-            .then((res) => requestTechs())
+            .then(() => requestTechs())
             .catch((res) => console.log(res));
     }
 

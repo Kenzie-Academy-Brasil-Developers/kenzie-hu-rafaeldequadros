@@ -17,8 +17,8 @@ import { UserContext } from "../../contexts/UserContext";
 import { FieldError } from "react-hook-form";
 
 export interface IUserLogin {
-    email?: string;
-    password?: string | number;
+    email: string;
+    password: string | number;
     error?: {
         email?: FieldError;
         password?: FieldError;
